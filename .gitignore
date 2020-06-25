@@ -1,0 +1,5 @@
+.clang-format
+.idea
+.vscode
+cmake-*
+build*
