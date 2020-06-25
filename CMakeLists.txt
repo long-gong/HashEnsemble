@@ -75,5 +75,5 @@ add_executable(example test/hashensemble_example.cpp ${external_objs})
 add_test(NAME example
         COMMAND $<TARGET_FILE:example>)
 add_test(NAME vexample
-        COMMAND valgrind --leak-check=yes $<TARGET_FILE:example>)
+        COMMAND valgrind --leak-check=yes --error-exitcode=1 $<TARGET_FILE:example>)
 endif( ${ENABLE_TEST} )

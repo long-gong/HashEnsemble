@@ -164,6 +164,11 @@ void load_data(std::istream &inf, std::vector<T> &data) {
 
 int main(int argc, char **argv) {
   auto count = size_t(1e6);
+  if (argc == 2) count = std::stoul(argv[1]);
+  else if (argc > 2) {
+    std::cerr << fmt::format("Usage: {0} [NUM_KEYS_TO_TEST]", argv[0]) << std::endl;
+    exit(1);
+  }
   std::vector<uint64_t> data;
   const char *data_filename = "test_data.dat";
   const char *result_filename = "bench_results.csv";
