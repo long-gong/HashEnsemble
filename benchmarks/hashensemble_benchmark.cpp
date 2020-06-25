@@ -168,7 +168,7 @@ int main(int argc, char **argv) {
     std::string s{argv[1]};
     try {
       if (s.find('e') != std::string::npos)
-        count = size_t(std::stof(s);
+        count = size_t(std::stof(s));
       else
         count = std::stoul(s);
     } catch (const std::invalid_argument &e) {
