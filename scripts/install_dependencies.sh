@@ -2,6 +2,8 @@
 
 set -e
 
+sudo add-apt-repository universe
+sudo apt-get update
 sudo apt-get install -y libboost-serialization-dev libboost-container-dev valgrind
 
 rm -rf googletest
