@@ -15,7 +15,7 @@ cd /tmp
 rm -rf googletest
 
 rm -rf fmt
-https://github.com/fmtlib/fmt.git
+git clone https://github.com/fmtlib/fmt.git
 cd fmt
 mkdir build && cd build
 cmake ..
