@@ -62,7 +62,7 @@ target_compile_definitions(benchmark_ct_wyh PUBLIC -DUSE_WYH -DVERBOSE_LEVEL=2)
 target_include_directories(benchmark_ct_wyh PUBLIC benchmarks)
 target_link_libraries(benchmark_ct_wyh Boost::system Boost::serialization fmt::fmt)
 
-add_custom_target(Name benchmark
+add_custom_target(benchmark
         COMMAND $<TARGET_FILE:benchmark_rt>
         COMMAND $<TARGET_FILE:benchmark_ct_xxh>
         COMMAND $<TARGET_FILE:benchmark_ct_wyh>
