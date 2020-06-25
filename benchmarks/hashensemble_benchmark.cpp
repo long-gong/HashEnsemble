@@ -74,7 +74,7 @@ inline std::pair<double, double> speed_test(const std::vector<uint64_t> &input, 
     case HashFamily::WYH: {
       timer.restart();
       for (const auto key: input) dummy ^= wyhash((void *) &key, sizeof(key), seed, _wyp);
-      raw_exec_time = timer.elapsed() ;
+      raw_exec_time = timer.elapsed();
       break;
     }
     case HashFamily::MURMUR: {
@@ -84,7 +84,7 @@ inline std::pair<double, double> speed_test(const std::vector<uint64_t> &input, 
         MurmurHash3_x86_32((void *) &key, sizeof(key), seed, (void *) &out);
         dummy ^= out;
       }
-      raw_exec_time = timer.elapsed() ;
+      raw_exec_time = timer.elapsed();
       break;
     }
     case HashFamily::SPOOKY: {
@@ -164,11 +164,31 @@ void load_data(std::istream &inf, std::vector<T> &data) {
 
 int main(int argc, char **argv) {
   auto count = size_t(1e6);
-  if (argc == 2) count = std::stoul(argv[1]);
-  else if (argc > 2) {
-    std::cerr << fmt::format("Usage: {0} [NUM_KEYS_TO_TEST]", argv[0]) << std::endl;
+  if (argc == 2) {
+    auto string
+    s(argv[1]);
+    try {
+      if (s.find('e') != std::string::npos)
+        count = size_t(std::stof(s);
+      else
+        count = std::stoul(s);
+    } catch (const std::invalid_argument &e) {
+      std::cerr << fmt::format("InvalidArgumentError: {}", e.what()) << std::endl;
+      exit(1);
+    } catch (const std::out_of_range &e) {
+      std::cerr << fmt::format("OutOfRangeError: {}", e.what()) << std::endl;
+      exit(1);
+    } catch (const std::exception &e) {
+      std::cerr << fmt::format("UnknownError: {}", e.what()) << std::endl;
+      exit(1);
+    }
+  } else if (argc > 2) {
+    std::cerr
+        << fmt::format("Usage: {0} [NUM_KEYS_TO_TEST]\n\t\t\twhere NUM_KEYS_TO_TEST is a positive integer", argv[0])
+        << std::endl;
     exit(1);
   }
+  println_if(fmt::format("Number tests : {}", count), g::verbose_level > 0);
   std::vector<uint64_t> data;
   const char *data_filename = "test_data.dat";
   const char *result_filename = "bench_results.csv";
@@ -177,12 +197,12 @@ int main(int argc, char **argv) {
     print_if(fmt::format("Loading test data from {} ... ", data_filename), g::verbose_level > 0);
     load_data(inf, data);
     inf.close();
-    print_if("Done!", g::verbose_level > 0);
+    println_if("Done!", g::verbose_level > 0);
   } else {
     print_if(fmt::format("Generating random test data and save to file {} ... ", data_filename), g::verbose_level > 0);
     data = GenerateRandomSet64(count);
     archive_data(data);
-    print_if("Done!", g::verbose_level > 0);
+    println_if("Done!", g::verbose_level > 0);
   }
 
   std::ofstream os(result_filename, std::ios::app);
@@ -192,8 +212,10 @@ int main(int argc, char **argv) {
   }
   long pos = os.tellp();
   if (pos == 0)
-    os << fmt::format("name,key type,speed (million keys per second),raw_speed (million keys per second),{collisions}\n",
-                      "collisions"_a = fmt::join(collision_cases, ","));
+    os
+        << fmt::format(
+            "name,key type,speed (million keys per second),raw_speed (million keys per second),{collisions}\n",
+            "collisions"_a = fmt::join(collision_cases, ","));
   test_all_in_one(data, os);
   os.close();
 
