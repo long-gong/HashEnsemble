@@ -165,8 +165,7 @@ void load_data(std::istream &inf, std::vector<T> &data) {
 int main(int argc, char **argv) {
   auto count = size_t(1e6);
   if (argc == 2) {
-    auto string
-    s(argv[1]);
+    std::string s{argv[1]};
     try {
       if (s.find('e') != std::string::npos)
         count = size_t(std::stof(s);
