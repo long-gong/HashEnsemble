@@ -108,7 +108,7 @@ std::vector<size_t> get_test_ratios() {
 
 #if USE_XXH || USE_WYH
 void test_all_in_one(const std::vector<uint64_t> &input, std::ostream &os = std::cout) {
-  println_if(" -----> !!Start Test!! <------", g::verbose_level > 0);
+  println_if(" \t\t-----> !!Start Test!! <------", g::verbose_level > 0);
   HashEnsemble h{};
   auto speed = speed_test(input, h);
   std::vector<std::string> collisions;
@@ -116,17 +116,18 @@ void test_all_in_one(const std::vector<uint64_t> &input, std::ostream &os = std:
     auto col = collision_test(input, input.size() * ratio, h);
     collisions.emplace_back(fmt::format("{:.2f}", col * 100));
   }
-  os << fmt::format("{name},{key_t},{speed:.2f},{raw_speed:.2f},{collisions}\n",
+  os << fmt::format("{name},{key_t},{speed:.2f},{raw_speed:.2f},{degradation:.2f},{collisions}\n",
                     "name"_a = h.name() + "_ct",
                     "key_t"_a = "64-bit integer",
                     "speed"_a = speed.first,
                     "raw_speed"_a = speed.second,
+                    "degradation"_a= (speed.second - speed.first) / speed.second * 100.0,
                     "collisions"_a = fmt::join(collisions, ","));
-  println_if(" -----> !!Done!! <------", g::verbose_level > 0);
+  println_if(" \t\t-----> !!Done!! <------", g::verbose_level > 0);
 }
 #else
 void test_all_in_one(const std::vector<uint64_t> &input, std::ostream &os = std::cout) {
-  println_if(" -----> !!Start Test!! <------", g::verbose_level > 0);
+  println_if(" \t\t-----> !!Start Test!! <------", g::verbose_level > 0);
 
   for (auto tid = static_cast<int>(HashFamily::XXH); tid <= static_cast<int>(HashFamily::SPOOKY); tid++) {
     auto t = HashFamily(tid);
@@ -137,15 +138,16 @@ void test_all_in_one(const std::vector<uint64_t> &input, std::ostream &os = std:
       auto col = collision_test(input, input.size() * ratio, h);
       collisions.emplace_back(fmt::format("{:.2f}", col * 100));
     }
-    os << fmt::format("{name},{key_t},{speed:.2f},{raw_speed:.2f},{collisions}\n",
+    os << fmt::format("{name},{key_t},{speed:.2f},{raw_speed:.2f},{degradation:.2f},{collisions}\n",
                       "name"_a = h.name(),
                       "key_t"_a = "64-bit integer",
                       "speed"_a = speed.first,
                       "raw_speed"_a = speed.second,
+                      "degradation"_a= (speed.second - speed.first) / speed.second * 100.0,
                       "collisions"_a = fmt::join(collisions, ","));
   }
 
-  println_if(" -----> !!Done!! <------", g::verbose_level > 0);
+  println_if(" \t\t-----> !!Done!! <------", g::verbose_level > 0);
 }
 #endif
 
@@ -213,7 +215,7 @@ int main(int argc, char **argv) {
   if (pos == 0)
     os
         << fmt::format(
-            "name,key type,speed (million keys per second),raw_speed (million keys per second),{collisions}\n",
+            "name,key type,speed (million keys per second),raw_speed (million keys per second),degradation (%),{collisions}\n",
             "collisions"_a = fmt::join(collision_cases, ","));
   test_all_in_one(data, os);
   os.close();
