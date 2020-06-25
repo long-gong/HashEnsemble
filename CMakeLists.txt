@@ -46,14 +46,13 @@ include_directories(${Boost_INCLUDE_DIRS})
 find_package(fmt REQUIRED)
 include_directories(${fmt_INCLUDE_DIRS})
 
-
-
 add_executable(benchmark_rt benchmarks/hashensemble_benchmark.cpp ${external_objs})
+target_compile_definitions(benchmark_rt PUBLIC -DVERBOSE_LEVEL=2)
 target_include_directories(benchmark_rt PUBLIC benchmarks)
 target_link_libraries(benchmark_rt Boost::system Boost::serialization fmt::fmt)
 
 add_executable(benchmark_ct_xxh benchmarks/hashensemble_benchmark.cpp ${external_objs})
-target_compile_definitions(benchmark_ct_xxh PUBLIC -DUSE_XXH)
+target_compile_definitions(benchmark_ct_xxh PUBLIC -DUSE_XXH -DVERBOSE_LEVEL=2)
 target_include_directories(benchmark_ct_xxh PUBLIC benchmarks)
 target_link_libraries(benchmark_ct_xxh Boost::system Boost::serialization fmt::fmt)
 

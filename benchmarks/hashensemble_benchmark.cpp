@@ -179,7 +179,6 @@ int main(int argc, char **argv) {
     archive_data(data);
     print_if("Done!", g::verbose_level > 0);
   }
-  std::cout << "Done!" << std::endl;
 
   std::ofstream os(result_filename, std::ios::app);
   std::vector<std::string> collision_cases;
