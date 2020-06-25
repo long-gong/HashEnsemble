@@ -26,6 +26,7 @@
 
 #include "Platform.h"
 #include <stddef.h>
+#include <string.h>
 
 #ifdef _MSC_VER
 # define INLINE __forceinline
