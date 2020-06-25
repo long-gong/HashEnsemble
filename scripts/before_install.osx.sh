@@ -2,7 +2,7 @@
 
 set -e
 
-brew install boost
+brew list boost || brew install boost
 
 rm -rf googletest
 git clone https://github.com/google/googletest.git
