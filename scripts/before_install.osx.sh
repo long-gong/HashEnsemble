@@ -2,7 +2,7 @@
 
 set -e
 
-brew install boost valgrind
+brew install boost
 
 rm -rf googletest
 git clone https://github.com/google/googletest.git
