@@ -38,7 +38,7 @@ add_library(hashensemble SHARED src/hashensemble.h ${external_objs})
 if ( ${ENABLE_BENCHMARK} )
 find_package(Boost
         REQUIRED
-        COMPONENTS system serialization
+        COMPONENTS serialization
         )
 
 include_directories(${Boost_INCLUDE_DIRS})
@@ -59,7 +59,7 @@ target_link_libraries(benchmark_ct_xxh Boost::system Boost::serialization fmt::f
 add_executable(benchmark_ct_wyh benchmarks/hashensemble_benchmark.cpp ${external_objs})
 target_compile_definitions(benchmark_ct_wyh PUBLIC -DUSE_WYH -DVERBOSE_LEVEL=2)
 target_include_directories(benchmark_ct_wyh PUBLIC benchmarks)
-target_link_libraries(benchmark_ct_wyh Boost::system Boost::serialization fmt::fmt)
+target_link_libraries(benchmark_ct_wyh Boost::serialization fmt::fmt)
 
 add_custom_target(benchmark
         COMMAND $<TARGET_FILE:benchmark_rt>
