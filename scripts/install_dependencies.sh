@@ -2,7 +2,7 @@
 
 set -e
 
-sudo apt-get install -y libboost-serialization valgrind
+sudo apt-get install -y libboost-serialization-dev valgrind
 
 cd /tmp
 rm -rf dynamic_bitset
