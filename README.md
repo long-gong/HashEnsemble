@@ -30,17 +30,17 @@ make
 ## Benchmarks
 
 On a workstation with Intel(R) Core(TM) i7-9800X CPU @ 3.80GHz running Ubuntu 18.04, we obtained the following results
-```csv
-name,key type,speed (million keys per second),raw_speed (million keys per second),degradation (%),collision_1 (%),collision_2 (%),collision_5 (%),collision_10 (%)
-xxhash,64-bit integer,601.86,1065.02,43.49,36.79,10.66,1.87,0.48
-wyhash,64-bit integer,944.51,1518.76,37.81,36.78,10.65,1.87,0.48
-MurmurHash3,64-bit integer,201.88,147.03,-37.30,36.79,10.66,1.88,0.49
-Spooky,64-bit integer,147.88,163.45,9.53,36.78,10.65,1.87,0.48
-xxhash_ct,64-bit integer,1075.82,1063.99,-1.11,36.79,10.66,1.87,0.48
-wyhash_ct,64-bit integer,1026.66,1590.61,35.46,36.78,10.65,1.87,0.48
-```
 
-`_rt` means the hash function was selected during the runtime whereas `_ct` means selection was done during compile time.
+|name       |key type      |speed (million keys per second)|raw_speed (million keys per second)|degradation (%)|collision_1 (%)|collision_2 (%)|collision_5 (%)|collision_10 (%)|
+|-----------|--------------|-------------------------------|-----------------------------------|---------------|---------------|---------------|---------------|----------------|
+|xxhash     |64-bit integer|601.86                         |1065.02                            |43.49          |36.79          |10.66          |1.87           |0.48            |
+|wyhash     |64-bit integer|944.51                         |1518.76                            |37.81          |36.78          |10.65          |1.87           |0.48            |
+|MurmurHash3|64-bit integer|201.88                         |147.03                             |-37.30         |36.79          |10.66          |1.88           |0.49            |
+|Spooky     |64-bit integer|147.88                         |163.45                             |9.53           |36.78          |10.65          |1.87           |0.48            |
+|xxhash_ct  |64-bit integer|1075.82                        |1063.99                            |-1.11          |36.79          |10.66          |1.87           |0.48            |
+|wyhash_ct  |64-bit integer|1026.66                        |1590.61                            |35.46          |36.78          |10.65          |1.87           |0.48            |
+
+`_rt` means the hash function was selected during the runtime whereas `_ct` means selection was done during compile time. `collision_x` is the collision ratio when using the numnber of bins as `x` times as that of keys.
 
 **Overall Performance**:
 > wyhash > xxhash > MurmurHash3 > Spooky
