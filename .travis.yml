@@ -19,7 +19,7 @@ matrix:
       env: CXX="clang++" CC="clang" BUILD_TYPE=release
 
 before_install:
-  - chmod +x ./scripts/install_dependencies.sh && ./scripts/install_dependencies.sh
+  - source ./scripts/before_install.${TRAVIS_OS_NAME}.sh
 
 script:
   - CC="$CC" CXX="$CXX" cmake . -DENABLE_BENCHMARK=On -DENABLE_TEST=On

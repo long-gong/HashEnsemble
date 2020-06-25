@@ -1,8 +1,8 @@
 # HashEnsemble
+
 [![Build Status](https://travis-ci.org/long-gong/HashEnsemble.svg?branch=master)](https://travis-ci.org/long-gong/HashEnsemble)
 
 [HashEnsemble](https://github.com/long-gong/HashEnsemble) is just an ensemble of a few good hash functions (_e.g._ xxhash).
-
 
 ## Dependencies
 
@@ -12,10 +12,13 @@
 + [boost-serialization](https://github.com/boostorg/serialization)
 
 Install:
+
 ```bash
-chmod +x ./scripts/install_dependencies.sh
-./scripts/install_dependencies.sh
+chmod +x ./scripts/before_install.<OS>.sh
+./scripts/install_dependencies.<OS>.sh
 ```
+
+where `<OS>` can be `linux` (for Ubuntu) or `osx` (for MacOs)
 
 **!!ONLY REQUIRED if you want to use benchmarks!!**
 
