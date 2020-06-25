@@ -2,7 +2,7 @@
 
 set -e
 
-brew install boost-serialization boost-container valgrind
+brew install boost valgrind
 
 rm -rf googletest
 git clone https://github.com/google/googletest.git
