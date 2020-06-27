@@ -1,4 +1,11 @@
 #include "hashensemble.h"
+#if defined(USE_XXH) || defined(USE_WYH)
+#include "MurmurHash3.h"
+#include "Spooky.h"
+#include "wyhash.h"
+#include "xxh3.h"
+#endif 
+
 #include "simple_timer.h"
 #include "random.h"
 #include <bitset>

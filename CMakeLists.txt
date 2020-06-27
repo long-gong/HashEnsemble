@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 project(hashensemble)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -fPIC")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O3 -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -fPIC -march=native")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O3 -fPIC -march=native")
 
 message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
@@ -43,6 +43,7 @@ if (${ENABLE_BENCHMARK})
 
     include_directories(${Boost_INCLUDE_DIRS})
 
+    set(fmt_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/lib/cmake/fmt)
     find_package(fmt REQUIRED)
     include_directories(${fmt_INCLUDE_DIRS})
 

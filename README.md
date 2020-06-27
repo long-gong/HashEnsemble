@@ -6,7 +6,6 @@
 
 ## Dependencies
 
-+ [googletest](https://github.com/google/googletest)
 + [fmtlib](https://github.com/fmtlib/fmt)
 + [boost-dynamic_bitset](https://github.com/boostorg/dynamic_bitset)
 + [boost-serialization](https://github.com/boostorg/serialization)
@@ -15,7 +14,7 @@ Install:
 
 ```bash
 chmod +x ./scripts/before_install.<OS>.sh
-./scripts/install_dependencies.<OS>.sh
+cd ./scripts && ./install_dependencies.<OS>.sh
 ```
 
 where `<OS>` can be `linux` (for Ubuntu) or `osx` (for MacOs)

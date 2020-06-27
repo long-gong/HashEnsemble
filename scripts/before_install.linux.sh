@@ -6,22 +6,20 @@ sudo add-apt-repository universe
 sudo apt-get update
 sudo apt-get install -y libboost-serialization-dev libboost-container-dev valgrind
 
-rm -rf googletest
-git clone https://github.com/google/googletest.git
-cd googletest
-mkdir build && cd build
-cmake ..
-make -j4
-sudo make install
-cd /tmp
-rm -rf googletest
 
+install_dir=$(dirname $(pwd))/external
+
+if [ ! -d "${install_dir}" ]; then
+    mkdir -p "${install_dir}"
+fi
+
+cd /tmp
 rm -rf fmt
 git clone https://github.com/fmtlib/fmt.git
 cd fmt
 mkdir build && cd build
-cmake ..
+cmake .. -DCMAKE_INSTALL_PREFIX=${install_dir} -DFMT_TEST=Off
 make -j4
-sudo make install
+make install
 cd /tmp
 rm -rf fmt

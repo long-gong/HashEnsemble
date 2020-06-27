@@ -1,10 +1,16 @@
 #ifndef ENSEMBLEHASH_H_
 #define ENSEMBLEHASH_H_
 
+#if USE_XXH
+#include "xxh3.h"
+#elif USE_WYH
+#include "wyhash.h"
+#else
 #include "MurmurHash3.h"
 #include "Spooky.h"
 #include "wyhash.h"
 #include "xxh3.h"
+#endif 
 
 #include <string>
 #include <type_traits>
